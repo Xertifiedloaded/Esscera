@@ -29,8 +29,8 @@ export default async function ShopPage() {
         <section className="relative py-24 bg-secondary">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p className="text-[#D4AF37] text-sm tracking-[0.3em] uppercase mb-4">The Collection</p>
-            <h1 className="text-5xl font-bold text-foreground mb-6">Our Fragrances</h1>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">Our Fragrances</h1>
+            <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
               Each scent is a masterpiece, meticulously crafted to evoke emotions and create lasting impressions.
             </p>
           </div>

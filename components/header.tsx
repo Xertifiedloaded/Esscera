@@ -3,12 +3,12 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { ShoppingBag, Menu, User, LogOut } from "lucide-react"
+import { ShoppingBag, Menu, User, LogOut, ChevronRight } from "lucide-react"
 import { useCart } from "@/lib/cart-context"
 import { useAuth } from "@/lib/auth-context"
 import { useToast } from "@/hooks/use-toast"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -132,49 +132,68 @@ export function Header() {
                   <span className="sr-only">Menu</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] bg-background/95 backdrop-blur-md border-purple-400/20">
-                <div className="flex flex-col gap-8 mt-8">
+              <SheetContent side="right" className="w-[85%] max-w-[400px] bg-background/95 backdrop-blur-md border-purple-400/20 px-6">
+                <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+                
+                <div className="flex flex-col gap-6 mt-8">
                   {user && (
-                    <>
-                      <div className="pb-4 border-b border-purple-400/20">
-                        <p className="text-sm text-muted-foreground mb-1">Welcome,</p>
-                        <p className="text-lg font-medium text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-amber-400">
-                          {user.name || user.email}
-                        </p>
-                      </div>
-                    </>
+                    <div className="pb-6 border-b border-purple-400/20">
+                      <p className="text-xs text-muted-foreground mb-1 uppercase tracking-wider">Welcome,</p>
+                      <p className="text-lg font-medium text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-amber-400">
+                        {user.name || user.email}
+                      </p>
+                    </div>
                   )}
                   
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
-                      className="text-lg tracking-widest uppercase text-foreground hover:text-transparent hover:bg-clip-text hover:bg-linear-to-r hover:from-purple-400 hover:to-amber-400 transition-all"
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
+                  <div className="flex flex-col gap-3">
+                    {navLinks.map((link, index) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setIsOpen(false)}
+                        style={{ marginLeft: `${index * 12}px` }}
+                        className="group flex items-center justify-between py-4 px-4 rounded-lg border border-purple-400/10 hover:border-purple-400/30 hover:bg-purple-400/5 transition-all"
+                      >
+                        <span className="text-base tracking-wide uppercase text-foreground group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-linear-to-r group-hover:from-purple-400 group-hover:to-amber-400 transition-all">
+                          {link.label}
+                        </span>
+                        <ChevronRight className="w-5 h-5 text-muted-foreground group-hover:text-purple-400 transition-colors" />
+                      </Link>
+                    ))}
+                  </div>
                   
                   {user && (
-                    <>
+                    <div className="flex flex-col gap-2 mt-4 pt-6 border-t border-purple-400/20">
                       <Link
                         href={isAdmin ? "/admin" : "/account"}
                         onClick={() => setIsOpen(false)}
-                        className="text-lg tracking-widest uppercase text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-amber-400"
+                        className="group flex items-center justify-between py-4 px-4 rounded-lg border border-purple-400/20 hover:border-purple-400/40 bg-purple-400/5 hover:bg-purple-400/10 transition-all"
                       >
-                        {isAdmin ? "Admin" : "Account"}
+                        <div className="flex items-center gap-3">
+                          <User className="w-5 h-5 text-purple-400" />
+                          <span className="text-base tracking-wide uppercase text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-amber-400">
+                            {isAdmin ? "Admin" : "Account"}
+                          </span>
+                        </div>
+                        <ChevronRight className="w-5 h-5 text-purple-400" />
                       </Link>
+                      
                       <button
                         onClick={() => {
                           handleLogout()
                           setIsOpen(false)
                         }}
-                        className="text-lg tracking-widest uppercase text-red-400 hover:text-red-300 transition-colors text-left"
+                        className="group flex items-center justify-between py-4 px-4 rounded-lg border border-red-400/20 hover:border-red-400/40 hover:bg-red-400/5 transition-all text-left"
                       >
-                        Logout
+                        <div className="flex items-center gap-3">
+                          <LogOut className="w-5 h-5 text-red-400" />
+                          <span className="text-base tracking-wide uppercase text-red-400 group-hover:text-red-300 transition-colors">
+                            Logout
+                          </span>
+                        </div>
+                        <ChevronRight className="w-5 h-5 text-red-400 group-hover:text-red-300 transition-colors" />
                       </button>
-                    </>
+                    </div>
                   )}
                 </div>
               </SheetContent>
