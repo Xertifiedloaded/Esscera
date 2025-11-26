@@ -77,7 +77,7 @@ export async function POST(request: Request) {
         category,
         image: imageUrl,
         available,
-        seoMeta: seoMeta || undefined, // <-- FIXED
+        seoMeta: seoMeta || undefined, 
         createdById: session.id
       }
     })

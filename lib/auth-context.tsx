@@ -59,30 +59,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const signup = async (
-    email: string,
-    username: string,
-    password: string,
-  ): Promise<{ success: boolean; error?: string }> => {
-    try {
-      const res = await fetch("/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, username, password }),
-      })
+const signup = async (
+  email: string,
+  username: string,
+  password: string,
+): Promise<{ success: boolean; error?: string }> => {
+  try {
+    const res = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, username, password }),
+    })
 
-      const data = await res.json()
+    const data = await res.json()
 
-      if (!res.ok) {
-        return { success: false, error: data.error }
-      }
-
-      setUser(data.user)
-      return { success: true }
-    } catch {
-      return { success: false, error: "Failed to create account" }
+    if (!res.ok) {
+      return { success: false, error: data.error }
     }
+
+    return { success: true }
+  } catch {
+    return { success: false, error: "Failed to create account" }
   }
+}
+
 
   const logout = async () => {
     await fetch("/api/auth/logout", { method: "POST" })

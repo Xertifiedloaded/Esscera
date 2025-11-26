@@ -54,7 +54,7 @@ export default function SignUpPage() {
         title: "Account created",
         description: "Welcome to esscera!",
       })
-      router.push("/")
+      router.push("/login")
     } else {
       toast({
         title: "Error",
