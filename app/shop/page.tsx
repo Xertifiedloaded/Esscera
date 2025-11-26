@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ShopContent } from "@/components/shop-content"

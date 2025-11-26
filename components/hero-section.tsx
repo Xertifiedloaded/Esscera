@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+
 import { prisma } from "@/lib/prisma"
 import ProductHeaderClient from "./ProductHeaderName"
 import ScrollButton from "./ScrollButton"
@@ -8,7 +11,7 @@ export default async function HeroSection() {
     take: 4,
     orderBy: { createdAt: "desc" },
   })
-
+ 
   return (
     <section className="relative h-screen overflow-hidden bg-black">
       <div className="absolute inset-0">

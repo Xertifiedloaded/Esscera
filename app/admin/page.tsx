@@ -83,7 +83,6 @@ export default function AdminDashboard() {
         <p className="text-muted-foreground mt-1">Welcome back, Admin</p>
       </div>
 
-      {/* Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {statCards.map((stat) => (
           <Card key={stat.title} className="bg-card border-border">
@@ -102,7 +101,6 @@ export default function AdminDashboard() {
         ))}
       </div>
 
-      {/* Recent Orders */}
       <Card className="bg-card border-border">
         <CardHeader>
           <CardTitle className="text-foreground">Recent Orders</CardTitle>
